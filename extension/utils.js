@@ -1,4 +1,4 @@
-const API_URL = "https://your-vercel-app.vercel.app/api"; // Replace with your actual Vercel domain
+const API_URL = "https://sudo-mu.vercel.app/api"; // Replace with your actual Vercel domain
 
 export async function checkPageForKeywords(text) {
   try {
