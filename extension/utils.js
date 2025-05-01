@@ -1,30 +1,28 @@
-const API_URL = "https://sudo-mu.vercel.app/api"; // Replace with your actual Vercel domain
+// extension/utils.js
+const API_URL = "https://sudo-mu.vercel.app/api";
 
-export async function checkPageForKeywords(text) {
+window.checkPageForKeywords = async function(text) {
   try {
     const res = await fetch(`${API_URL}/rules`);
-    const data = await res.json();
-    const { blockedKeywords = [] } = data;
-
+    const { blockedKeywords = [] } = await res.json();
     for (let word of blockedKeywords) {
       if (text.includes(word.toLowerCase())) {
         return { blocked: true, reason: `Contains keyword: ${word}` };
       }
     }
-    return { blocked: false };
-  } catch (err) {
-    console.error("Keyword check failed:", err);
-    return { blocked: false };
+  } catch (e) {
+    console.error("Keyword check failed:", e);
   }
-}
+  return { blocked: false };
+};
 
-export async function checkShouldUninstall() {
+window.checkShouldUninstall = async function() {
   try {
     const res = await fetch(`${API_URL}/toggle`);
     const { allowUninstall } = await res.json();
     return allowUninstall;
-  } catch (err) {
-    console.error("Uninstall check failed:", err);
+  } catch (e) {
+    console.error("Uninstall check failed:", e);
     return false;
   }
-}
+};

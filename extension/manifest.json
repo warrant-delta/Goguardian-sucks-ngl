@@ -1,21 +1,27 @@
 {
-    "manifest_version": 3,
-    "name": "EduFilter Demo",
-    "version": "1.0",
-    "permissions": ["scripting", "tabs"],
-    "host_permissions": ["<all_urls>"],
-    "background": {
-      "service_worker": "background.js"
-    },
-    "content_scripts": [
-      {
-        "matches": ["<all_urls>"],
-        "js": ["content.js"],
-        "run_at": "document_idle"
-      }
-    ],
-    "action": {
-      "default_title": "EduFilter Active"
+  "manifest_version": 3,
+  "name": "EduFilter",
+  "version": "1.0",
+  "description": "Custom student web filter with admin control.",
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "storage"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["utils.js", "content.js"],
+      "run_at": "document_idle"
     }
+  ],
+  "action": {
+    "default_title": "EduFilter"
   }
-  
+}
